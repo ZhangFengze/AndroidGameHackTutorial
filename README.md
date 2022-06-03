@@ -5,7 +5,7 @@
 [Android Killer](https://github.com/liaojack8/AndroidKiller) 集成了Apk反编译、Apk打包等功能。
 ### JADX
 [JADX](https://github.com/skylot/jadx) Apk反编译，可得Java源码。
-### IDA pro
+### IDA Pro
 不知道如何描述了。这里主要用来反编译apk里的so文件。收费。
 ### Ghidra
 [Ghidra](https://github.com/NationalSecurityAgency/ghidra) 功能与IDA相近，开源免费
@@ -14,7 +14,7 @@
 * 通过Android Killer与JADX解包、反编译
 * 查看AndroidManifest.xml得到MainActivity
 * 从MainActivity入手查看Java代码，通常关键部分最后会调用到Native库
-* 从解包出来的lib文件夹下，应该能找到.so库，通过IDA pro或Ghidra反编译
+* 从解包出来的lib文件夹下，应该能找到.so库，通过IDA Pro或Ghidra反编译
 * 被外部调用的函数是要导出的，可以从函数表、导出表或者全局搜索，直接找到对应名字的函数
 
 
