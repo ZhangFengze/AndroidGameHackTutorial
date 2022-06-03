@@ -66,9 +66,10 @@ jdb -connect com.sun.jdi.SocketAttach:hostname=localhost,port=7777
 
 ### Ghidra动态调试
 Ghidra动态调试很多坑。  
-1. windows下不能起本地gdb client，需要ssh到linux下开gdb client，再连到gdb server
-2. Ghidra的ssh client实现有问题，连不上默认配置的ssh server，需要调ssh server配置
-3. Ghidra调试非常不稳定，经常卡死，基本没顺畅调试成功过  
+* windows下不能起本地gdb client，需要ssh到linux下开gdb client，再连到gdb server
+* Ghidra的ssh client实现有问题，连不上默认配置的ssh server，需要调ssh server配置
+* Ghidra调试非常不稳定，经常卡死，基本没顺畅调试成功过  
+
 这里仍然列出步骤以供参考
 ##### WSL配置openssh
 ```
