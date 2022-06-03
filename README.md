@@ -11,10 +11,5 @@ PC是x86架构。为了运行效率，主流模拟器都使用了硬件虚拟化
 据说一加手机也很方便，没有试过。
 
 ### 模拟器与WSL不兼容  
-windows配WSL是常见组合  
-WSL与主流模拟器都使用hyper-v，不知道什么原因不能同时存在  
-解决方法是换一个和hyper-v兼容的模拟器  
-不走硬件虚拟化的纯软件模拟器当然可以，但是慢到不能用  
-Bluestacks Nougat 64bit，兼容hyper-v，但root比较麻烦  
-推荐使用Bluestacks Nougat 64bit，再配合Bluestacks Tweaker开root  
-可以直接从Bluestacks Tweaker官网找支持的Bluestacks版本，例如4.28  
+WSL与主流模拟器都使用hyper-v，不知道什么原因不能同时存在。解决方法是换一个和hyper-v兼容的模拟器。  
+推荐Bluestacks Nougat 64bit 配合Bluestacks Tweaker开root。  
