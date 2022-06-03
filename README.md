@@ -63,3 +63,60 @@ jdb -connect com.sun.jdi.SocketAttach:hostname=localhost,port=7777
 # host这一步做完以后，目标app等待debugger的就算等完了，剩下全看IDA debugger的操作
 # 最好jdb连上，目标app取消等待了以后，给jdb关了，避免jdb将app暂停，或者其他冲突
 ```
+
+### Ghidra动态调试
+Ghidra动态调试很多坑。  
+1. windows下不能起本地gdb client，需要ssh到linux下开gdb client，再连到gdb server
+2. Ghidra的ssh client实现有问题，连不上默认配置的ssh server，需要调ssh server配置
+3. Ghidra调试非常不稳定，经常卡死，基本没顺畅调试成功过
+这里仍然列出步骤以供参考
+##### WSL配置openssh
+```
+sudo apt install openssh-server
+
+# ghidra的ssh client太旧了，需要改一下ssh server的配置，要不然连不上
+# 参考https://github.com/NationalSecurityAgency/ghidra/discussions/3487
+vim /etc/ssh/sshd_config
+添加以下几行
+AllowUsers
+Port 8888 # 这是ssh端口号
+KexAlgorithms +diffie-hellman-group1-sha1
+Ciphers +aes128-cbc
+PasswordAuthentication yes
+ChallengeResponseAuthentication yes
+UsePAM yes
+X11Forwarding yes
+AcceptEnv LANG LC_*
+
+# 起ssh server
+# WSL没有systemctl，有service
+# 每次开WSL都要起一下，或者加到自启动
+sudo service ssh start
+```
+##### 起游戏并attach
+```
+adb push <NDK>/prebuilt/android-arm/gdbserver /data/local/tmp # gdbserver
+
+# adb forward只listen了127.0.0.1
+# 后续从WSL里连不上gdbserver
+# 需要让adb forward listen所有地址
+# 参考https://stackoverflow.com/questions/56130335/adb-port-forwarding-to-listen-on-all-interfaces
+# nodaemon会block，后续得另开一个窗口做其他操作
+# 去掉nodaemon就正常返回
+# 但实测必须nodaemon
+# 如果adb server已经起了，需要adb kill-server
+adb -a nodaemon server start
+adb -a forward tcp:9090 tcp:9090
+
+adb shell
+su
+am start xxx
+/data/local/tmp/gdbserver/gdbserver :9090 --attach pid
+```
+##### Ghidra调试
+开Ghidra -> Debug Tool -> (Menu) Debugger -> Debug xxx -> in GDB via ssh  
+GDB launch command填gdb-multiarch，而不是gdb，因为gdb server是arm的    
+其他正常填ssh server的  
+
+连接完成后去右侧gdb窗口 target remote ip:port  
+注意此时是在ssh里，ip要填host的ip，而不是127.0.0.1  
