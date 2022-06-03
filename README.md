@@ -25,6 +25,7 @@
 PC是x86架构。为了运行效率，主流模拟器都使用了硬件虚拟化技术，也就是直接在x86硬件上跑x86指令，而不是走纯软件模拟（实测纯软件模拟效率极低，基本一个小时都开不了机）。为了能在x86机器上跑arm指令，基本上都是将arm翻译成x86再执行（详情搜索libhoudini）。
 
 现有的工具对 *PC上开硬件虚拟化跑安卓模拟器，模拟器里跑由arm转换成x86的指令* 这种复杂情况处理的不是很好。经实测，CheatEngine、Ghidra、IDA pro等工具，在模拟器下都出现了各种各样的问题，包括但不限于无法下断点、无法读取寄存器、无法分析内存等。但对于简单场景，例如只想开CheatEngine改一下数据，模拟器是足够的。复杂情况都推荐上真机。
+
 ### 真机root  
 可以直接上网买root好的。  
 也可以买小米手机，[通过官网解锁BootLoader，刷入Magisk，授权root](https://miuiver.com/how-to-root-xiaomi-phone/) 。  
@@ -33,3 +34,10 @@ PC是x86架构。为了运行效率，主流模拟器都使用了硬件虚拟化
 ### 模拟器与WSL不兼容  
 WSL与主流模拟器都使用hyper-v，不知道什么原因不能同时存在。解决方法是换一个和hyper-v兼容的模拟器。  
 推荐Bluestacks Nougat 64bit 配合Bluestacks Tweaker开root。  
+
+### Apk改debuggable
+据说debuggable为false时无法调试。实测debuggable为false时，IDA Pro仍可调试，但无法am start -D启动时等待调试器。建议改了避免有奇怪的问题发生。  
+
+参考[令App可调试的几种方法](https://www.cnblogs.com/lsgxeva/p/13490991.html)  
+
+推荐Android Killer打开AndroidManifest.xml，application加上android:debuggable="true"，点Compile
