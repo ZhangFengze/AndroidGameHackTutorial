@@ -1,6 +1,15 @@
 # 静态分析
-### 准备apk
-一般游戏官网可直接下载android apk。也可从应用商店爬取，例如[google play](https://apps.evozi.com/apk-downloader/)
+### 获取apk
+一般游戏官网可直接下载android apk。也可从应用商店爬取，例如[google play](https://apps.evozi.com/apk-downloader/)。
+### Android Killer
+[Android Killer](https://github.com/liaojack8/AndroidKiller) 集成了Apk反编译、Apk打包等功能。
+### JADX
+[JADX](https://github.com/skylot/jadx) Apk反编译，可得Java源码。
+### IDA pro
+不知道如何描述了。这里主要用来反编译apk里的so文件。收费。
+### Ghidra
+[Ghidra](https://github.com/NationalSecurityAgency/ghidra) 功能与IDA相近，开源免费
+
 
 # 动态调试
 ### 用真机而不是模拟器
