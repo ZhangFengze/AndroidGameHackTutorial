@@ -1,4 +1,8 @@
-# 准备工作
+# 静态分析
+### 准备apk
+一般游戏官网可直接下载android apk。也可从应用商店爬取，例如[google play](https://apps.evozi.com/apk-downloader/)
+
+# 动态调试
 ### 用真机而不是模拟器
 主流游戏都会选择用Native代码(C++)实现核心功能，这样运行效率高并且有一定的破解门槛。一般是将Native代码编译成库，用安卓常规开发方式例如Java作为壳，调用Native库。编译好的Native库是平台相关的，市面上的apk基本上只提供arm指令集的库。
 
