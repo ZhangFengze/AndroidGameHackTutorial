@@ -6,10 +6,9 @@ PC是x86架构。为了运行效率，主流模拟器都使用了硬件虚拟化
 
 现有的工具对 *PC上开硬件虚拟化跑安卓模拟器，模拟器里跑由arm转换成x86的指令* 这种复杂情况处理的不是很好。经实测，CheatEngine、Ghidra、IDA pro等工具，在模拟器下都出现了各种各样的问题，包括但不限于无法下断点、无法读取寄存器、无法分析内存等。但对于简单场景，例如只想开CheatEngine改一下数据，模拟器是足够的。复杂情况都推荐上真机。
 ### 真机root  
-偷懒可以直接上网买root好的  
-也可以买小米手机，通过官网解锁BootLoader，刷入Magisk，授权root  
-可参考<https://miuiver.com/how-to-root-xiaomi-phone/>  
-据说一加手机也很方便，没有试过  
+可以直接上网买root好的。  
+也可以买小米手机，[通过官网解锁BootLoader，刷入Magisk，授权root](https://miuiver.com/how-to-root-xiaomi-phone/) 。  
+据说一加手机也很方便，没有试过。
 
 ### 模拟器与WSL不兼容  
 windows配WSL是常见组合  
