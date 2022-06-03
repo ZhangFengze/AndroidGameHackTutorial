@@ -41,3 +41,25 @@ WSL与主流模拟器都使用hyper-v，不知道什么原因不能同时存在�
 参考[令App可调试的几种方法](https://www.cnblogs.com/lsgxeva/p/13490991.html)  
 
 推荐Android Killer打开AndroidManifest.xml，application加上android:debuggable="true"，点Compile
+
+### IDA Pro动态调试
+```
+adb push <IDA Pro>/dbgsrv /data/local/tmp # 将IDA debug server传到手机，一般用dbgsrv/android_server
+adb forward tcp:23946 tcp:23946 # dbgsrv的默认端口
+adb shell
+su
+/data/local/tmp/dgbsrv/android_server # 手机上起debug server
+# 起server后，开游戏，IDA -> Debugger -> Attach to process
+
+# 如果需要app启动就暂停，等调试器挂上了再继续运行
+am start -D package/activity
+# 此时目标app会等待debugger，此时将IDA attach上
+
+# 再host执行
+adb jdwp # 会列出所有可debug进程，里面理应有目标进程，这一步无所谓
+adb shell pidof package # 打印pid
+adb forward tcp:7777 jdwp:pid # 上面的pid
+jdb -connect com.sun.jdi.SocketAttach:hostname=localhost,port=7777
+# host这一步做完以后，目标app等待debugger的就算等完了，剩下全看IDA debugger的操作
+# 最好jdb连上，目标app取消等待了以后，给jdb关了，避免jdb将app暂停，或者其他冲突
+```
